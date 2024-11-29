@@ -1,0 +1,58 @@
+<div class="space-y-6">
+    <h1 class="text-3xl font-bold text-gray-800">Staff Management</h1>
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Add New Staff Member</h2>
+        <form (ngSubmit)="addStaffMember()" class="space-y-4">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input [(ngModel)]="newStaffMember.name" name="name" id="name" placeholder="Full Name"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    required>
+            </div>
+            <div>
+                <label for="position" class="block text-sm font-medium text-gray-700">Position</label>
+                <select [(ngModel)]="newStaffMember.position" name="position" id="position"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    required>
+                    <option value="">Select a position</option>
+                    <option value="Barista">Barista</option>
+                    <option value="Waiter">Waiter</option>
+                    <option value="Chef">Chef</option>
+                    <option value="Manager">Manager</option>
+                </select>
+            </div>
+            <div>
+                <label for="contactNumber" class="block text-sm font-medium text-gray-700">Contact Number</label>
+                <input [(ngModel)]="newStaffMember.contactNumber" name="contactNumber" id="contactNumber"
+                    placeholder="Contact Number"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    required>
+            </div>
+            <button type="submit"
+                class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors">
+                Add Staff Member
+            </button>
+        </form>
+    </div>
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Staff Members</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            @for (member of staffMembers; track member.id) {
+            <div class="bg-gray-50 rounded-lg p-4 shadow hover:shadow-md transition-shadow">
+                <h3 class="font-semibold text-lg mb-2">{{ member.name }}</h3>
+                <p class="text-gray-600">Position: {{ member.position }}</p>
+                <p class="text-gray-600">Contact: {{ member.contactNumber }}</p>
+                <div class="mt-4 flex justify-end space-x-2">
+                    <button class="text-blue-600 hover:text-blue-800 transition-colors">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="text-red-600 hover:text-red-800 transition-colors"
+                        (click)="deleteStaffMember(member.id)">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

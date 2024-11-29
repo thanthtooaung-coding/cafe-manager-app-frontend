@@ -1,0 +1,57 @@
+<div class="space-y-6">
+    <h1 class="text-3xl font-bold text-gray-800">Menu Management</h1>
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Add New Item</h2>
+        <form (ngSubmit)="addItem()" class="space-y-4">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Item Name</label>
+                <input [(ngModel)]="newItem.name" name="name" id="name" placeholder="Item Name"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    required>
+            </div>
+            <div>
+                <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                <input [(ngModel)]="newItem.price" name="price" id="price" type="number" step="0.01" placeholder="Price"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    required>
+            </div>
+            <div>
+                <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                <select [(ngModel)]="newItem.category" name="category" id="category"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    required>
+                    <option value="">Select a category</option>
+                    <option value="Coffee">Coffee</option>
+                    <option value="Tea">Tea</option>
+                    <option value="Pastry">Pastry</option>
+                    <option value="Sandwich">Sandwich</option>
+                    <option value="Salad">Salad</option>
+                </select>
+            </div>
+            <button type="submit"
+                class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors">
+                Add Item
+            </button>
+        </form>
+    </div>
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Menu Items</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            @for (item of menuItems; track item.id) {
+            <div class="bg-gray-50 rounded-lg p-4 shadow hover:shadow-md transition-shadow">
+                <h3 class="font-semibold text-lg mb-2">{{ item.name }}</h3>
+                <p class="text-gray-600">Price: ${{ item.price.toFixed(2) }}</p>
+                <p class="text-gray-600">Category: {{ item.category }}</p>
+                <div class="mt-4 flex justify-end space-x-2">
+                    <button class="text-blue-600 hover:text-blue-800 transition-colors">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="text-red-600 hover:text-red-800 transition-colors" (click)="deleteItem(item.id)">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
